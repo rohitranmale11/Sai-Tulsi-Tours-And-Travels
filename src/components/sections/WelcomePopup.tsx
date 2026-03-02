@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Car, Sparkles } from 'lucide-react';
+import welcomeSound from '@/assets/sounds/welcome.mp3';
 
 export const WelcomePopup = () => {
   const [show, setShow] = useState(true);
@@ -8,7 +9,7 @@ export const WelcomePopup = () => {
 
   useEffect(() => {
     // Audio path remains the same - ensure file exists at this path
-    audioRef.current = new Audio('/src/assets/sounds/welcome.mp3');
+    audioRef.current = new Audio(welcomeSound);
     audioRef.current.volume = 0.4;
   }, []);
 

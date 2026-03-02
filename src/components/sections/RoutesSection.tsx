@@ -1,12 +1,18 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { MapPin, Clock, Navigation, Users, ArrowRight } from 'lucide-react';
+import mumbaiImg from '@/assets/routes/gateway-of-india.jpg';
+import grishneshwarImg from '@/assets/routes/grishneshwar-temple.jpeg';
+import elloraImg from '@/assets/routes/ellora-caves.jpeg';
+import shaniImg from '@/assets/routes/shani.jpg';
+import trimbakImg from '@/assets/routes/trimbak.jpg';
+import bhimashankarImg from '@/assets/routes/sri-bhimashankar-temple.jpg';
 
 const routes = [
   {
     title: 'Shirdi to Mumbai',
     subtitle: 'Gateway of India • Marine Drive • Business Hub',
-    image: './src/assets/routes/gateway-of-india.jpg',
+    image: mumbaiImg,
     distance: '250 km',
     duration: '5-6 hrs',
     passengers: '4-7 seats',
@@ -19,7 +25,7 @@ const routes = [
   {
     title: 'Grishneshwar Jyotirlinga',
     subtitle: 'Sacred Temple • Ellora Caves Nearby',
-    image: './src/assets/routes/grishneshwar-temple.jpeg',
+    image: grishneshwarImg,
     distance: '105 km',
     duration: '2.5-3 hrs',
     passengers: '4-7 seats',
@@ -32,7 +38,7 @@ const routes = [
   {
     title: 'Ellora Caves',
     subtitle: 'UNESCO Heritage • Ancient Architecture',
-    image: './src/assets/routes/ellora-caves.jpeg',
+    image: elloraImg,
     distance: '110 km',
     duration: '3 hrs',
     passengers: '4-7 seats',
@@ -45,7 +51,7 @@ const routes = [
   {
     title: 'Shani Shingnapur',
     subtitle: 'Sacred Village • Divine Protection',
-    image: './src/assets/routes/shani.jpg',
+    image: shaniImg,
     distance: '70 km',
     duration: '1.5-2 hrs',
     passengers: '4-7 seats',
@@ -58,7 +64,7 @@ const routes = [
   {
     title: 'Trimbakeshwar',
     subtitle: 'Jyotirlinga • Godavari Origin',
-    image: './src/assets/routes/trimbak.jpg',
+    image: trimbakImg,
     distance: '125 km',
     duration: '3-3.5 hrs',
     passengers: '4-7 seats',
@@ -71,7 +77,7 @@ const routes = [
   {
     title: 'Bhimashankar',
     subtitle: 'Forest Temple • Nature & Spirituality',
-    image: './src/assets/routes/sri-bhimashankar-temple.jpg',
+    image: bhimashankarImg,
     distance: '185 km',
     duration: '4.5-5 hrs',
     passengers: '4-7 seats',
