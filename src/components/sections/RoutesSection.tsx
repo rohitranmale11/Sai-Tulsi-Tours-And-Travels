@@ -1,91 +1,95 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MapPin, Clock, Navigation, Users, ArrowRight } from 'lucide-react';
+import { MapPin, Clock, Users, CheckCircle, ArrowRight, Phone } from 'lucide-react';
+
 import mumbaiImg from '@/assets/routes/gateway-of-india.jpg';
-import grishneshwarImg from '@/assets/routes/grishneshwar-temple.jpeg';
 import elloraImg from '@/assets/routes/ellora-caves.jpeg';
 import shaniImg from '@/assets/routes/shani.jpg';
 import trimbakImg from '@/assets/routes/trimbak.jpg';
 import bhimashankarImg from '@/assets/routes/sri-bhimashankar-temple.jpg';
+import image from '@/assets/routes/image.png';
 
 const routes = [
   {
-    title: 'Shirdi to Mumbai',
-    subtitle: 'Gateway of India • Marine Drive • Business Hub',
+    title: 'Mumbai Darshan',
+    subtitle: 'Full City Coverage',
     image: mumbaiImg,
     distance: '250 km',
-    duration: '5-6 hrs',
+    duration: 'Full Day',
     passengers: '4-7 seats',
-    priceFrom: '₹4,500',
-    infoEn: 'The city of dreams — from iconic Gateway of India to vibrant Marine Drive, perfect for business trips and weekend getaways.',
-    infoHi: 'सपनों की नगरी — गेटवे ऑफ इंडिया, मरीन ड्राइव और बॉलीवुड के लिए प्रसिद्ध',
-    highlights: ['Business travel', 'Airport connections', 'Weekend tours'],
-    popular: true,
+    points: [
+      'Gateway of India',
+      'Marine Drive',
+      'Siddhivinayak Temple',
+      'Haji Ali Dargah',
+      'Juhu Beach'
+    ],
   },
   {
-    title: 'Grishneshwar Jyotirlinga',
-    subtitle: 'Sacred Temple • Ellora Caves Nearby',
-    image: grishneshwarImg,
-    distance: '105 km',
-    duration: '2.5-3 hrs',
-    passengers: '4-7 seats',
-    priceFrom: '₹2,200',
-    infoEn: 'One of 12 sacred Jyotirlingas, offering deep spiritual experiences near the UNESCO Ellora Caves.',
-    infoHi: 'भगवान शिव के 12 पवित्र ज्योतिर्लिंगों में से एक',
-    highlights: ['Temple darshan', 'Family pilgrimage', 'Peaceful retreat'],
-    popular: false,
-  },
-  {
-    title: 'Ellora Caves',
-    subtitle: 'UNESCO Heritage • Ancient Architecture',
+    title: 'Shirdi – Sambhajinagar',
+    subtitle: '3 Major Spiritual Points',
     image: elloraImg,
     distance: '110 km',
-    duration: '3 hrs',
+    duration: 'Full Day',
     passengers: '4-7 seats',
-    priceFrom: '₹2,300',
-    infoEn: 'World Heritage Site featuring spectacular Buddhist, Hindu, and Jain rock-cut temples and sculptures.',
-    infoHi: 'यूनेस्को विश्व धरोहर स्थल — प्राचीन गुफाओं के लिए प्रसिद्ध',
-    highlights: ['History lovers', 'Photography', 'Cultural tours'],
-    popular: false,
+    points: [
+      'Bhadra Maruti Temple',
+      'Grishneshwar Jyotirlinga',
+      'Ellora Caves'
+    ],
+  },
+  {
+    title: 'Nashik Darshan',
+    subtitle: 'All Major Nashik Temples',
+    image: trimbakImg,
+    distance: '125 km',
+    duration: 'Full Day',
+    passengers: '4-7 seats',
+    points: [
+      'Kalaram Temple',
+      'Trimbakeshwar Jyotirlinga',
+      'Panchavati',
+      'Godavari Ghat'
+    ],
   },
   {
     title: 'Shani Shingnapur',
-    subtitle: 'Sacred Village • Divine Protection',
+    subtitle: 'Sacred Temple Visit',
     image: shaniImg,
     distance: '70 km',
-    duration: '1.5-2 hrs',
+    duration: 'Half Day',
     passengers: '4-7 seats',
-    priceFrom: '₹1,800',
-    infoEn: 'Famous village dedicated to Lord Shani, known for houses without doors and strong faith traditions.',
-    infoHi: 'भगवान शनि को समर्पित — बिना दरवाजों वाले घरों के लिए जाना जाता है',
-    highlights: ['Quick trip', 'Spiritual blessings', 'Faith journey'],
-    popular: true,
+    points: [
+      'Shani Temple',
+      'Local Darshan',
+      'Nearby Spiritual Spots'
+    ],
   },
   {
-    title: 'Trimbakeshwar',
-    subtitle: 'Jyotirlinga • Godavari Origin',
-    image: trimbakImg,
-    distance: '125 km',
-    duration: '3-3.5 hrs',
-    passengers: '4-7 seats',
-    priceFrom: '₹2,500',
-    infoEn: 'Sacred Jyotirlinga temple near Nashik and the holy source of the Godavari River.',
-    infoHi: 'नाशिक के पास पवित्र ज्योतिर्लिंग — गोदावरी नदी का उद्गम स्थल',
-    highlights: ['Spiritual rituals', 'River origin', 'Temple town'],
-    popular: false,
-  },
-  {
-    title: 'Bhimashankar',
-    subtitle: 'Forest Temple • Nature & Spirituality',
+    title: 'Bhimashankar Darshan',
+    subtitle: 'Jyotirlinga + Nature',
     image: bhimashankarImg,
     distance: '185 km',
-    duration: '4.5-5 hrs',
+    duration: 'Full Day',
     passengers: '4-7 seats',
-    priceFrom: '₹3,800',
-    infoEn: 'Serene Jyotirlinga nestled in lush forests and hills, perfect for pilgrims and nature enthusiasts.',
-    infoHi: 'घने जंगलों और पहाड़ियों के बीच स्थित पवित्र ज्योतिर्लिंग',
-    highlights: ['Nature trekking', 'Wildlife sanctuary', 'Hill temple'],
-    popular: false,
+    points: [
+      'Bhimashankar Temple',
+      'Wildlife Sanctuary',
+      'Hill View Points'
+    ],
+  },
+  {
+    title: 'Vani Darshan',
+    subtitle: 'Saptashrungi Temple',
+    image: image,
+    distance: '150 km',
+    duration: 'Full Day',
+    passengers: '4-7 seats',
+    points: [
+      'Saptashrungi Temple',
+      'Hill Temple Darshan',
+      'Scenic Route'
+    ],
   },
 ];
 
@@ -93,158 +97,142 @@ export const RoutesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const scrollToBooking = () => {
-    const element = document.querySelector('#booking');
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section id="routes" ref={ref} className="py-20 bg-slate-50 relative overflow-hidden">
-      
-      {/* Background road pattern */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #f59e0b 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
-      </div>
+    <section id="routes" ref={ref} className="py-24 bg-slate-50">
+      <div className="container mx-auto px-4">
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-
-        {/* Header */}
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl mx-auto mb-20"
         >
-          <div className="inline-flex items-center gap-2 bg-slate-900 text-amber-400 px-4 py-1.5 rounded-full mb-6">
-            <Navigation className="w-3.5 h-3.5" />
-            <span className="font-bold uppercase tracking-widest text-[10px]">Popular Destinations</span>
-          </div>
-          
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-            Where Would You
-            <span className="text-amber-500 block">Like to Go?</span>
+          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest text-amber-600 uppercase bg-amber-100 rounded-full">
+            Premium Packages
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
+            Popular Travel Routes
           </h2>
-          
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Explore our most frequent routes from Shirdi. Whether it's a holy pilgrimage or a city trip, we ensure a smooth ride.
+          <p className="text-slate-500 text-lg leading-relaxed">
+            Experience complete darshan & sightseeing coverage with our curated routes. 
+            We provide comprehensive tours, not just a drop service.
           </p>
         </motion.div>
 
-        {/* Routes Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Grid of Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {routes.map((route, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-[2rem] overflow-hidden bg-white border border-slate-200 hover:border-amber-400/50 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -12 }}
+              className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col"
             >
-              {/* Popular Badge */}
-              {route.popular && (
-                <div className="absolute top-4 left-4 z-10 bg-amber-400 text-slate-900 text-[10px] font-black uppercase px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-slate-900 rounded-full animate-pulse" />
-                  Most Booked
-                </div>
-              )}
-
-              {/* Image Section */}
-              <div className="relative h-56 overflow-hidden">
+              {/* Image Header */}
+              <div className="relative h-64 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10 opacity-80" />
                 <img
                   src={route.image}
                   alt={route.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                
-                <div className="absolute bottom-4 left-6 right-6">
-                  <h3 className="font-bold text-xl text-white mb-1 group-hover:text-amber-400 transition-colors">
-                    {route.title}
-                  </h3>
-                  <p className="text-xs text-slate-300 font-medium">{route.subtitle}</p>
+                <div className="absolute bottom-6 left-6 z-20">
+                  <span className="bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg">
+                    {route.subtitle}
+                  </span>
                 </div>
               </div>
 
-              {/* Content Section */}
-              <div className="p-6 flex flex-col flex-grow">
-                
-                {/* Stats Grid */}
-                <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-slate-100">
-                  <div className="text-center">
-                    <MapPin className="w-4 h-4 text-amber-500 mx-auto mb-1" />
-                    <div className="text-[10px] uppercase font-bold text-slate-400 mb-0.5">KM</div>
-                    <div className="text-sm font-black text-slate-800">{route.distance}</div>
+              {/* Card Content */}
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 group-hover:text-amber-600 transition-colors">
+                  {route.title}
+                </h3>
+
+                {/* Quick Info Grid */}
+                <div className="grid grid-cols-3 gap-2 p-4 bg-slate-50 rounded-2xl mb-8 border border-slate-100">
+                  <div className="flex flex-col items-center text-center">
+                    <MapPin className="w-4 h-4 text-amber-500 mb-1" />
+                    <span className="text-[10px] text-slate-400 font-bold uppercase">Dist.</span>
+                    <span className="text-xs font-bold text-slate-800">{route.distance}</span>
                   </div>
-                  <div className="text-center border-x border-slate-100">
-                    <Clock className="w-4 h-4 text-amber-500 mx-auto mb-1" />
-                    <div className="text-[10px] uppercase font-bold text-slate-400 mb-0.5">Time</div>
-                    <div className="text-sm font-black text-slate-800">{route.duration}</div>
+                  <div className="flex flex-col items-center text-center border-x border-slate-200">
+                    <Clock className="w-4 h-4 text-amber-500 mb-1" />
+                    <span className="text-[10px] text-slate-400 font-bold uppercase">Trip</span>
+                    <span className="text-xs font-bold text-slate-800">Day</span>
                   </div>
-                  <div className="text-center">
-                    <Users className="w-4 h-4 text-amber-500 mx-auto mb-1" />
-                    <div className="text-[10px] uppercase font-bold text-slate-400 mb-0.5">Seats</div>
-                    <div className="text-sm font-black text-slate-800">{route.passengers}</div>
+                  <div className="flex flex-col items-center text-center">
+                    <Users className="w-4 h-4 text-amber-500 mb-1" />
+                    <span className="text-[10px] text-slate-400 font-bold uppercase">Seats</span>
+                    <span className="text-xs font-bold text-slate-800">{route.passengers.split(' ')[0]}</span>
                   </div>
                 </div>
 
-                <p className="text-sm text-slate-600 leading-relaxed mb-3">
-                  {route.infoEn}
-                </p>
-                <p className="text-xs text-slate-400 italic mb-6">
-                  {route.infoHi}
-                </p>
-
-                {/* Price & Button */}
-                <div className="mt-auto flex items-center justify-between">
-                  <div>
-                    <div className="text-[10px] uppercase font-black text-slate-400 tracking-wider">Starts At</div>
-                    <div className="text-2xl font-black text-slate-900">{route.priceFrom}</div>
-                  </div>
-                  <button
-                    onClick={scrollToBooking}
-                    className="w-12 h-12 rounded-2xl bg-amber-400 flex items-center justify-center text-slate-900 shadow-lg shadow-amber-400/20 hover:bg-slate-900 hover:text-amber-400 transition-all duration-300 group/btn"
-                  >
-                    <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                {/* Checklist */}
+                <div className="mb-8 flex-grow">
+                  <p className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4">
+                    Destinations Covered
+                  </p>
+                  <ul className="grid grid-cols-1 gap-3">
+                    {route.points.map((point, i) => (
+                      <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-600">
+                        <div className="bg-amber-100 p-1 rounded-full">
+                          <CheckCircle className="w-3.5 h-3.5 text-amber-600" />
+                        </div>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+
+                {/* Action Button */}
+                <motion.a
+                  whileTap={{ scale: 0.96 }}
+                  href="tel:+919356310911"
+                  className="w-full flex items-center justify-center gap-3 bg-slate-900 hover:bg-amber-400 text-white hover:text-slate-900 font-bold py-4 rounded-2xl transition-all duration-300 shadow-xl group/btn"
+                >
+                  Book This Journey
+                  <ArrowRight className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                </motion.a>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Custom Route Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-slate-900 rounded-[2.5rem] p-8 lg:p-12 text-center border border-slate-800 relative overflow-hidden"
+        {/* Refined Custom Route Section */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="mt-24 relative overflow-hidden bg-slate-900 rounded-[3rem] p-12 md:p-16 text-center"
         >
-          <div className="absolute top-0 left-0 w-64 h-64 bg-amber-400/5 rounded-full -ml-32 -mt-32 blur-3xl" />
+          {/* Decorative Glows */}
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-amber-400/20 rounded-full blur-[100px]" />
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-amber-400/10 rounded-full blur-[100px]" />
           
-          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 relative z-10">
-            Planning a custom journey?
-          </h3>
-          <p className="text-slate-400 mb-8 max-w-xl mx-auto relative z-10">
-            We provide tailored packages for multi-day trips and unconventional routes. Call us for a custom quote today.
-          </p>
-          
-          <a
-            href="tel:+919356310911"
-            className="inline-flex items-center gap-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-black px-8 py-4 rounded-2xl shadow-xl transition-all relative z-10 active:scale-95"
-          >
-            <span className="text-base">Call +91 93563 10911</span>
-          </a>
+          <div className="relative z-10">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Need a Custom Itinerary?
+            </h3>
+            <p className="text-slate-400 mb-10 max-w-xl mx-auto text-lg">
+              We create personalized travel packages tailored to your schedule and preferences across India.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="tel:+919356310911"
+                className="flex items-center gap-3 bg-amber-400 hover:bg-white text-slate-900 font-black px-10 py-5 rounded-2xl transition-all transform hover:scale-105 shadow-2xl"
+              >
+                <Phone className="w-5 h-5" />
+                +91 93563 10911
+              </a>
+            </div>
+          </div>
         </motion.div>
 
       </div>
     </section>
   );
-};  
+};

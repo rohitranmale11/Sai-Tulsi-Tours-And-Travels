@@ -161,11 +161,11 @@ export const Navbar = () => {
                     </p>
                     <div className="grid grid-cols-3 gap-2">
                       <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">10K+</div>
+                        <div className="text-sm font-bold text-amber-600">5K+</div>
                         <div className="text-[9px] text-slate-400 font-bold">Trips</div>
                       </div>
                       <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">15+</div>
+                        <div className="text-sm font-bold text-amber-600">5+</div>
                         <div className="text-[9px] text-slate-400 font-bold">Years</div>
                       </div>
                       <div className="text-center p-2 bg-white rounded-lg shadow-sm">
