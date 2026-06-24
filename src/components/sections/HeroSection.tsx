@@ -1,223 +1,155 @@
-import { motion } from 'framer-motion';
-import { ShieldCheck, Clock, Star, Award, Phone, ArrowRight, CheckCircle, MapPin, Users } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import {
+  ArrowRight,
+  BadgeIndianRupee,
+  CarFront,
+  Check,
+  Clock3,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Users,
+  MapPin,
+  Award,
+} from 'lucide-react';
+import heroImage from '@/assets/hero-shirdi-cab-services.png';
 
-const trustMetrics = [
+const trustFeatures = [
+  { icon: Clock3, title: '24/7 Service', detail: 'Day or night, we are ready' },
+  { icon: Sparkles, title: 'Clean & Safe Cars', detail: 'Sanitized before every trip' },
+  { icon: ShieldCheck, title: 'Experienced Drivers', detail: 'Local, verified professionals' },
+  { icon: BadgeIndianRupee, title: 'Transparent Pricing', detail: 'Clear fares, no surprises' },
+];
+
+const statistics = [
   { value: '5,000+', label: 'Happy Customers', icon: Users },
   { value: '5+', label: 'Years Experience', icon: Award },
-  { value: '4.8★', label: 'Average Rating', icon: Star },
   { value: '50+', label: 'Destinations', icon: MapPin },
+  { value: '4.8', label: 'Google Rating', icon: Star },
 ];
 
-const features = [
-  { icon: ShieldCheck, text: 'Verified Drivers', color: 'bg-amber-100 text-amber-700' },
-  { icon: Award, text: 'Licensed Vehicles', color: 'bg-slate-100 text-slate-700' },
-  { icon: Clock, text: '24/7 Available', color: 'bg-amber-100 text-amber-700' },
-  { icon: Star, text: '4.8★ Rated', color: 'bg-slate-100 text-slate-700' },
-];
-
-const carPaths = [
-  { delay: 0, duration: 25, yPosition: '15%' },
-  { delay: 8, duration: 30, yPosition: '45%' },
-  { delay: 16, duration: 28, yPosition: '75%' },
+const serviceBadges = [
+  'Temple Darshan',
+  'Airport Transfers',
+  'Outstation Cabs',
+  '24/7 Available',
 ];
 
 export const HeroSection = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   const scrollToRoutes = () => {
     const element = document.querySelector('#routes');
     if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 80;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
+  const reveal = (delay = 0) => ({
+    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
+  });
+
   return (
-    <section id="home" className="relative bg-slate-50 overflow-hidden">
-      
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        
-        {/* Floating Gradient Orbs */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-0 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl"
-        />
-        
-        <motion.div
-          animate={{ scale: [1, 1.3, 1], x: [0, -50, 0], y: [0, 50, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 left-0 w-96 h-96 bg-slate-900/5 rounded-full blur-3xl"
-        />
+    <section id="home" className="relative isolate flex min-h-[85svh] overflow-hidden bg-slate-950 font-heading text-white">
+      <motion.img
+        src={heroImage}
+        alt="Shirdi temple at sunrise with premium tourist cabs"
+        initial={{ scale: 1.04 }}
+        animate={{ scale: shouldReduceMotion ? 1 : 1.1 }}
+        transition={{ duration: 18, ease: 'easeOut' }}
+        className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-[62%_center] lg:object-center"
+      />
 
-        {/* Animated Road Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="road-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <motion.line
-                x1="0" y1="50" x2="100" y2="50"
-                stroke="#f59e0b" strokeWidth="2" strokeDasharray="20 10"
-                animate={{ x1: [0, 100], x2: [100, 200] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#road-pattern)" />
-        </svg>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.94)_0%,rgba(2,6,23,0.82)_34%,rgba(2,6,23,0.28)_68%,rgba(2,6,23,0.08)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.42)_0%,transparent_38%,rgba(2,6,23,0.68)_100%)]" />
+      <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:72px_72px]" />
 
-        {/* Animated Mini Cars */}
-        {carPaths.map((path, index) => (
-          <motion.div
-            key={index}
-            initial={{ x: '-10%', opacity: 0 }}
-            animate={{ x: ['0%', '110%'], opacity: [0, 0.4, 0.4, 0] }}
-            transition={{ duration: path.duration, delay: path.delay, repeat: Infinity, ease: "linear" }}
-            className="absolute"
-            style={{ top: path.yPosition }}
-          >
-            <svg width="40" height="20" viewBox="0 0 40 20" className="text-amber-500/30">
-              <rect x="8" y="6" width="24" height="10" rx="2" fill="currentColor"/>
-              <circle cx="13" cy="16" r="3" fill="currentColor"/>
-              <circle cx="27" cy="16" r="3" fill="currentColor"/>
-            </svg>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="pt-28 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
-          
-          {/* Trust Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex justify-center mb-6 lg:mb-8"
-          >
-            <div className="inline-flex items-center gap-2 bg-slate-900 text-white rounded-full px-5 py-2 shadow-xl shadow-slate-200">
-              <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-              <span className="text-xs sm:text-sm font-bold tracking-wide uppercase">
-                 Trusted Taxi Service in Shirdi
-              </span>
-            </div>
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-4 pb-5 pt-24 sm:px-6 sm:pb-6 sm:pt-28 lg:px-8 lg:pb-7 lg:pt-28">
+        <div className="my-auto max-w-3xl py-5 sm:py-7 lg:py-8">
+          <motion.div {...reveal()} className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-300 shadow-2xl backdrop-blur-xl">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            Shirdi's trusted cab service
           </motion.div>
 
-          {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-slate-900 text-center leading-tight mb-4"
-          >
-            Your Premium Journey Begins <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-400">With Sai Tulsi</span>
+          <motion.h1 {...reveal(0.08)} className="text-balance text-5xl font-black leading-[0.96] tracking-[-0.045em] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+            Shirdi Cab
+            <span className="block bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+              Services
+            </span>
           </motion.h1>
 
-          {/* Hindi Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-700 text-center mb-6 italic"
-          >
-            "आपकी यात्रा — हमारी जिम्मेदारी"
-          </motion.p>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-base sm:text-lg lg:text-xl text-slate-500 text-center max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            Safe, professional, and on-time. Your trusted partner for temple darshan, 
-            airport transfers, and outstation trips across Maharashtra.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-          >
-            <button
-              onClick={scrollToRoutes}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-8 py-4 rounded-2xl shadow-[0_10px_20px_-10px_rgba(245,158,11,0.5)] transition-all duration-300 active:scale-95"
-            >
-              <span className="text-base">View Routes & Pricing</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            
-            <a
-              href="tel:+919356310911"
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition-all duration-300 active:scale-95"
-            >
-              <Phone className="w-5 h-5 text-amber-400" />
-              <span className="text-base">+91 93563 10911</span>
-            </a>
-          </motion.div>
-
-          {/* Trust Features Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mb-16"
-          >
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col items-center group hover:shadow-md transition-shadow"
+          <motion.div {...reveal(0.14)} className="mt-5 flex max-w-2xl flex-wrap gap-2">
+            {serviceBadges.map((service) => (
+              <span
+                key={service}
+                className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white/90 shadow-lg backdrop-blur-md sm:px-3.5 sm:text-xs"
               >
-                <div className={`w-12 h-12 rounded-xl ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <feature.icon className="w-6 h-6" />
-                </div>
-                <p className="text-sm font-bold text-slate-800 text-center">
-                  {feature.text}
-                </p>
-              </div>
+                {service}
+              </span>
             ))}
           </motion.div>
 
-          {/* Stats Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="bg-slate-900 rounded-[2.5rem] p-8 lg:p-12 max-w-5xl mx-auto text-white relative overflow-hidden"
-          >
-            {/* Background Accent */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/10 rounded-full -mr-32 -mt-32 blur-3xl" />
-            
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-              {trustMetrics.map((metric, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl lg:text-4xl font-black text-amber-400 mb-2">
-                    {metric.value}
-                  </div>
-                  <div className="text-xs lg:text-sm text-slate-400 font-bold uppercase tracking-widest">
-                    {metric.label}
-                  </div>
-                </div>
-              ))}
-            </div>
+          <motion.p {...reveal(0.18)} className="mt-5 text-xl font-semibold tracking-tight text-white sm:text-2xl lg:text-3xl">
+            Comfortable. Reliable. Always On Time.
+          </motion.p>
+
+          <motion.p {...reveal(0.24)} className="mt-3 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg lg:text-xl">
+            Your trusted partner for temple darshan, airport transfers and outstation trips across Maharashtra.
+          </motion.p>
+
+         
+
+          <motion.div {...reveal(0.4)} className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-slate-300 sm:text-sm">
+            {['Instant booking support', 'Verified local drivers', 'No hidden charges'].map((item) => (
+              <span key={item} className="flex items-center gap-2">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
+                  <Check className="h-3 w-3" strokeWidth={3} />
+                </span>
+                {item}
+              </span>
+            ))}
           </motion.div>
-
         </div>
+
+        <motion.div {...reveal(0.48)} className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+          {trustFeatures.map((feature) => (
+            <div key={feature.title} className="group rounded-2xl border border-white/15 bg-slate-950/45 p-3 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-slate-950/60 sm:p-3.5">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-300/20 bg-amber-400/15 text-amber-300 sm:h-10 sm:w-10">
+                  <feature.icon className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-extrabold text-white sm:text-sm">{feature.title}</p>
+                  <p className="mt-0.5 hidden truncate text-[11px] text-slate-400 sm:block">{feature.detail}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.div {...reveal(0.56)} className="mt-2 grid grid-cols-2 overflow-hidden rounded-2xl border border-white/10 bg-white/95 text-slate-950 shadow-2xl sm:grid-cols-4">
+          {statistics.map((stat, index) => (
+            <div key={stat.label} className={`relative flex items-center gap-3 px-4 py-3 sm:px-5 ${index > 0 ? 'sm:border-l sm:border-slate-200' : ''} ${index % 2 === 1 ? 'border-l border-slate-200' : ''} ${index > 1 ? 'border-t border-slate-200 sm:border-t-0' : ''}`}>
+              <stat.icon className={`hidden h-5 w-5 shrink-0 text-amber-500 lg:block ${stat.icon === Star ? 'fill-amber-500' : ''}`} />
+              <div>
+                <div className="text-xl font-black tracking-tight sm:text-2xl">{stat.value}</div>
+                <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-slate-500 sm:text-[10px]">{stat.label}</div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
-      {/* Wave Separator */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" className="w-full h-auto translate-y-1">
-          <path
-            fill="#ffffff"
-            d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-          />
-        </svg>
+      <div className="pointer-events-none absolute bottom-0 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 pb-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/40 xl:flex">
+        <CarFront className="h-3.5 w-3.5" /> Premium rides across Maharashtra
       </div>
-
     </section>
   );
 };

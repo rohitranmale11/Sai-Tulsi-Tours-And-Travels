@@ -41,7 +41,7 @@ const reviews = [
     name: 'Sunita Deshmukh',
     location: 'Nashik, MH',
     rating: 5,
-    text: 'We travel to Shirdi monthly for business and always use Sai Tulsi. Consistent quality, well-maintained vehicles, and drivers who understand our schedule.',
+    text: 'We travel to Shirdi monthly for business and always use Shirdi Cab Services. Consistent quality, well-maintained vehicles, and drivers who understand our schedule.',
     route: { from: 'Nashik', to: 'Shirdi' },
     vehicle: 'Swift Dzire',
     date: 'Jan 2025',
@@ -117,7 +117,7 @@ export const ReviewsSection = () => {
             <span className="text-amber-500">Happy Travelers</span>
           </h2>
           <p className="text-slate-500 text-lg mb-10">
-            Real experiences from pilgrims and travelers who chose Sai Tulsi Tours & Travels for their Maharashtra journey.
+            Real experiences from pilgrims and travelers who chose Shirdi Cab Services for their Maharashtra journey.
           </p>
 
           {/* Centered Stats Bar */}

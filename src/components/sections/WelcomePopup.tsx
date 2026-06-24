@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Car, Sparkles } from 'lucide-react';
-import welcomeSound from '@/assets/sounds/welcome.mp3';
+import welcomeSound from '@/assets/sounds/Shirdi-Cab-Services.mp3';
 
 export const WelcomePopup = () => {
   const [show, setShow] = useState(true);
@@ -77,7 +77,7 @@ export const WelcomePopup = () => {
               </h2>
               
               <p className="text-slate-400 text-lg md:text-xl font-light tracking-wide mb-2">
-                Sai Tulsi Tours & Travels
+                Shirdi Cab Services
               </p>
               
               <div className="flex items-center justify-center gap-3 text-amber-500/80 mb-12">

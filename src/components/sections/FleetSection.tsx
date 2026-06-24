@@ -20,7 +20,7 @@ const vehicles = [
     exampleRoute: '250 km trip',
     features: ['AC Cabin', 'Music System', 'GPS Tracking', 'Clean Interior'],
     permitType: 'Commercial Yellow Plate',
-    popular: false,
+    popular: true,
     bestFor: 'Budget travel',
   },
   {
@@ -36,7 +36,7 @@ const vehicles = [
     exampleRoute: '250 km trip',
     features: ['Premium AC', 'Push Back Seats', 'Extra Legroom', 'USB Charging'],
     permitType: 'All India Tourist Permit',
-    popular: true,
+    popular: false,
     bestFor: 'Family comfort',
   },
   {
@@ -160,10 +160,11 @@ export const FleetSection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 
-                {/* Popular Badge */}
+                {/* Swift Dzire Most Booked Badge */}
                 {vehicle.popular && (
-                  <div className="absolute top-4 left-4 z-10 bg-slate-900 text-amber-400 text-[10px] font-black uppercase px-3 py-1.5 rounded-xl shadow-lg border border-amber-400/20">
-                    Featured
+                  <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-xl border border-amber-300/60 bg-amber-400 px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-slate-950 shadow-lg shadow-amber-950/20">
+                    <span className="animate-pulse" aria-hidden="true">🔥</span>
+                    Most Booked
                   </div>
                 )}
 

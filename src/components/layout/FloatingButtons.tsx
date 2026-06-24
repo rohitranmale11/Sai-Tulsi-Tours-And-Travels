@@ -27,7 +27,7 @@ export const FloatingButtons = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex flex-col items-end gap-4">
+    <div className="fixed bottom-4 right-4 z-[100] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8">
       
       {/* Back to Top Button */}
       {/* <AnimatePresence>
@@ -68,7 +68,7 @@ export const FloatingButtons = () => {
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full animate-pulse" />
               </div>
               <div>
-                <p className="text-sm font-black text-slate-950">Sai Tulsi Support</p>
+                <p className="text-sm font-black text-slate-950">Shirdi Cab Support</p>
                 <p className="text-[10px] font-bold text-green-600 uppercase tracking-tight">Online Now</p>
               </div>
             </div>
@@ -98,14 +98,14 @@ export const FloatingButtons = () => {
           animate={{ scale: 1 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-slate-950 text-white flex items-center justify-center shadow-2xl border border-white/10 group relative"
+          className="group relative flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-slate-950 text-white shadow-[0_12px_30px_-8px_rgba(15,23,42,0.7)] transition-shadow hover:shadow-[0_16px_36px_-8px_rgba(245,158,11,0.35)]"
         >
           <div className="absolute inset-0 bg-amber-400/20 rounded-2xl scale-0 group-hover:scale-100 transition-transform duration-500" />
           <motion.div
             animate={{ rotate: [0, -10, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2, repeatDelay: 4 }}
           >
-            <Phone className="w-6 h-6 md:w-7 md:h-7 text-amber-400 relative z-10" />
+            <Phone className="relative z-10 h-6 w-6 text-amber-400" />
           </motion.div>
         </motion.a>
 
@@ -119,7 +119,7 @@ export const FloatingButtons = () => {
           transition={{ delay: 0.2 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#25D366] text-white flex items-center justify-center shadow-2xl relative group overflow-hidden"
+          className="group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl bg-[#25D366] text-white shadow-[0_12px_30px_-8px_rgba(37,211,102,0.65)] transition-shadow hover:shadow-[0_16px_36px_-8px_rgba(37,211,102,0.9)]"
         >
           {/* Wave Ripple Animation */}
           <motion.div
@@ -131,10 +131,10 @@ export const FloatingButtons = () => {
             className="absolute inset-0 bg-white rounded-full"
           />
           
-          <MessageCircle className="w-7 h-7 md:w-8 md:h-8 relative z-10" />
+          <MessageCircle className="relative z-10 h-7 w-7" />
           
           {/* Notification Pips */}
-          <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full z-20" />
+          <span className="absolute right-2.5 top-2.5 z-20 h-2.5 w-2.5 rounded-full border-2 border-white bg-red-500" />
         </motion.a>
       </div>
     </div>

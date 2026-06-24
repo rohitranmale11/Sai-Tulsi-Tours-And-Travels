@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, MapPin, PhoneCall } from 'lucide-react';
+import { Menu, X, MapPin, CarFront } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -71,10 +71,10 @@ export const Navbar = () => {
               </div>
               <div>
                 <h1 className="font-bold text-xl lg:text-2xl leading-none tracking-tight text-slate-900">
-                  Sai Tulsi
+                  Shirdi Cab
                 </h1>
                 <p className="text-[10px] lg:text-xs font-bold uppercase tracking-[0.15em] text-amber-600">
-                  Tours & Travels
+                  Services
                 </p>
               </div>
             </a>
@@ -93,9 +93,12 @@ export const Navbar = () => {
               ))}
               
               {/* Call to Action in Nav */}
-              <button className="ml-4 px-5 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-amber-500 hover:text-slate-900 transition-all duration-300 flex items-center gap-2">
-                <PhoneCall className="w-4 h-4" />
-                Book Now
+              <button
+                onClick={() => scrollToSection('#booking')}
+                className="group ml-4 flex items-center gap-2.5 rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-500 hover:text-slate-900 hover:shadow-amber-500/25 active:translate-y-0"
+              >
+                <CarFront className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                Book Your Ride
               </button>
             </div>
 
@@ -161,11 +164,11 @@ export const Navbar = () => {
                     </p>
                     <div className="grid grid-cols-3 gap-2">
                       <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">5K+</div>
+                        <div className="text-sm font-bold text-amber-600">10K+</div>
                         <div className="text-[9px] text-slate-400 font-bold">Trips</div>
                       </div>
                       <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">5+</div>
+                        <div className="text-sm font-bold text-amber-600">15+</div>
                         <div className="text-[9px] text-slate-400 font-bold">Years</div>
                       </div>
                       <div className="text-center p-2 bg-white rounded-lg shadow-sm">
@@ -178,8 +181,12 @@ export const Navbar = () => {
               </div>
               
               <div className="p-6">
-                <button className="w-full py-4 bg-amber-400 text-slate-900 rounded-2xl font-bold shadow-lg shadow-amber-200 active:scale-95 transition-transform">
-                  Book a Taxi Now
+                <button
+                  onClick={() => scrollToSection('#booking')}
+                  className="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-amber-400 px-5 py-4 font-bold text-slate-900 shadow-lg shadow-amber-200 transition-all hover:-translate-y-0.5 hover:bg-amber-500 active:scale-95"
+                >
+                  <CarFront className="h-5 w-5" />
+                  Book Your Ride
                 </button>
               </div>
             </motion.div>

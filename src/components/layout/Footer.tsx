@@ -55,14 +55,22 @@ export const Footer = () => {
                 <Car className="w-6 h-6 text-slate-950" />
               </div>
               <div>
-                <h2 className="font-black text-xl tracking-tight leading-none">Sai Tulsi</h2>
-                <p className="text-amber-400 text-[10px] font-black uppercase tracking-[0.2em]">Tours & Travels</p>
+                <h2 className="font-black text-xl tracking-tight leading-none">Shirdi Cab Services</h2>
+                <p className="text-amber-400 text-[10px] font-black uppercase tracking-[0.2em]">Your Trusted Travel Partner</p>
               </div>
             </div>
 
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Providing premium, safe, and reliable spiritual travel experiences across Maharashtra since 2015. Your comfort is our devotion.
             </p>
+
+            <a
+              href="https://shirdicabservices.in"
+              className="inline-flex items-center gap-2 text-sm font-bold text-amber-400 transition-colors hover:text-amber-300"
+            >
+              shirdicabservices.in
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
 
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -123,7 +131,7 @@ export const Footer = () => {
             </h3>
             <div className="rounded-[2rem] overflow-hidden border border-slate-800 shadow-2xl relative group">
               <iframe
-                title="Sai Tulsi Shirdi Location"
+                title="Shirdi Cab Services office location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3759.088894468571!2d74.4691462!3d19.7615025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdc600109594f71%3A0x62916892523f2603!2sSai%20Tulsi%20Hotel!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                 className="w-full h-40 grayscale group-hover:grayscale-0 transition-all duration-700"
                 loading="lazy"
@@ -166,7 +174,7 @@ export const Footer = () => {
         {/* Final Bottom Bar */}
         <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-900/50 pt-8">
           <p className="text-slate-500 text-[11px] font-medium tracking-wide text-center md:text-left">
-            © {new Date().getFullYear()} <span className="text-slate-300">Sai Tulsi Tours & Travels</span>. All spiritual rights reserved.
+            © {new Date().getFullYear()} <span className="text-slate-300">Shirdi Cab Services</span>. All rights reserved.
           </p>
 
           <a
