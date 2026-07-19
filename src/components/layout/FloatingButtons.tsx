@@ -1,140 +1,105 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Phone, X, ArrowUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUp, MessageCircle, Phone, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+const phoneNumber = '+919356310911';
+const whatsappHref = `https://wa.me/919356310911?text=${encodeURIComponent('Hi, I want to book a taxi from Shirdi.')}`;
 
 export const FloatingButtons = () => {
   const [showHelper, setShowHelper] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
-    // Show helper card after 4 seconds
-    const timer = setTimeout(() => setShowHelper(true), 4000);
+    const helperTimer = window.setTimeout(() => setShowHelper(true), 2600);
+    const onScroll = () => setShowTop(window.scrollY > 620);
 
-    // Monitor scroll for "Back to Top" button
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
+      window.clearTimeout(helperTimer);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <div className="fixed bottom-4 right-4 z-[100] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8">
-      
-      {/* Back to Top Button */}
-      {/* <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            onClick={scrollToTop}
-            className="w-10 h-10 rounded-xl bg-slate-900/80 backdrop-blur-md text-amber-400 flex items-center justify-center border border-white/10 shadow-xl hover:bg-slate-950 transition-all mb-2"
-          >
-            <ArrowUp className="w-5 h-5" />
-          </motion.button>
-        )}
-      </AnimatePresence> */}
-
-      {/* Floating Helper Popup */}
+    <div className="fixed inset-x-0 bottom-4 z-[80] flex flex-col items-center gap-3 px-4 sm:inset-x-auto sm:bottom-7 sm:right-7 sm:items-end sm:px-0">
       <AnimatePresence>
         {showHelper && (
           <motion.div
-            initial={{ opacity: 0, y: 20, x: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-2xl p-5 w-72 border border-slate-100 mb-2 relative group"
+            initial={{ opacity: 0, y: 18, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.96 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full max-w-[19rem] border border-slate-200 bg-white/92 p-4 shadow-[0_24px_70px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:w-[19rem]"
           >
-            <button
-              onClick={() => setShowHelper(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-900 transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            
-            <div className="flex items-center gap-3 mb-3">
-              <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-slate-950" />
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="relative flex h-11 w-11 items-center justify-center bg-slate-950 text-amber-300">
+                  <MessageCircle className="h-5 w-5" />
+                  <span className="absolute -right-0.5 -top-0.5 h-3 w-3 border-2 border-white bg-emerald-500" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-slate-950">Booking desk online</p>
+                  <p className="text-[11px] font-medium text-slate-500">Get route and fare guidance</p>
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full animate-pulse" />
               </div>
-              <div>
-                <p className="text-sm font-black text-slate-950">Shirdi Cab Support</p>
-                <p className="text-[10px] font-bold text-green-600 uppercase tracking-tight">Online Now</p>
-              </div>
+              <button onClick={() => setShowHelper(false)} className="text-slate-400 transition-colors hover:text-slate-900" aria-label="Dismiss booking helper">
+                <X className="h-4 w-4" />
+              </button>
             </div>
-            
-            <p className="text-xs text-slate-500 leading-relaxed mb-4">
-              "Namaste! Looking for a taxi from Shirdi? Get an instant quote on WhatsApp."
-            </p>
-            
             <a
-              href="https://wa.me/919356310911?text=Hi,%20I%20want%20to%20book%20a%20taxi"
+              href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full py-3 bg-slate-900 text-amber-400 rounded-xl text-center text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors"
+              className="mt-4 flex items-center justify-center gap-2 bg-emerald-500 px-4 py-3 text-xs font-bold uppercase text-white transition-all hover:bg-emerald-600"
             >
-              Start Chat
+              WhatsApp Now
             </a>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Main Buttons Container */}
-      <div className="flex flex-col gap-3">
-        {/* Call Button */}
+      <div className="flex items-center justify-center gap-2">
+        <AnimatePresence>
+          {showTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex h-12 w-12 items-center justify-center border border-slate-200 bg-white text-slate-950 shadow-[0_18px_40px_rgba(15,23,42,0.12)] transition-all hover:-translate-y-1"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp className="h-5 w-5" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         <motion.a
-          href="tel:+919356310911"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="group relative flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-slate-950 text-white shadow-[0_12px_30px_-8px_rgba(15,23,42,0.7)] transition-shadow hover:shadow-[0_16px_36px_-8px_rgba(245,158,11,0.35)]"
+          href={`tel:${phoneNumber}`}
+          whileHover={{ y: -3, scale: 1.02 }}
+          whileTap={{ scale: 0.96 }}
+          className="flex h-14 w-14 items-center justify-center bg-slate-950 text-amber-300 shadow-[0_20px_45px_rgba(15,23,42,0.28)]"
+          aria-label="Call Shirdi Cab Services"
         >
-          <div className="absolute inset-0 bg-amber-400/20 rounded-2xl scale-0 group-hover:scale-100 transition-transform duration-500" />
-          <motion.div
-            animate={{ rotate: [0, -10, 10, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 2, repeatDelay: 4 }}
-          >
-            <Phone className="relative z-10 h-6 w-6 text-amber-400" />
-          </motion.div>
+          <Phone className="h-5 w-5" />
         </motion.a>
 
-        {/* WhatsApp Button */}
         <motion.a
-          href="https://wa.me/919356310911?text=Hi,%20I%20want%20to%20book%20a%20taxi"
+          href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl bg-[#25D366] text-white shadow-[0_12px_30px_-8px_rgba(37,211,102,0.65)] transition-shadow hover:shadow-[0_16px_36px_-8px_rgba(37,211,102,0.9)]"
+          whileHover={{ y: -3, scale: 1.02 }}
+          whileTap={{ scale: 0.96 }}
+          className="relative flex h-14 w-14 items-center justify-center overflow-hidden bg-emerald-500 text-white shadow-[0_20px_45px_rgba(16,185,129,0.34)]"
+          aria-label="WhatsApp Shirdi Cab Services"
         >
-          {/* Wave Ripple Animation */}
-          <motion.div
-            animate={{ 
-              scale: [1, 1.5, 2],
-              opacity: [0.3, 0.1, 0]
-            }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="absolute inset-0 bg-white rounded-full"
+          <motion.span
+            animate={{ scale: [1, 1.7, 2.15], opacity: [0.28, 0.12, 0] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
+            className="absolute inset-0 bg-white"
           />
-          
-          <MessageCircle className="relative z-10 h-7 w-7" />
-          
-          {/* Notification Pips */}
-          <span className="absolute right-2.5 top-2.5 z-20 h-2.5 w-2.5 rounded-full border-2 border-white bg-red-500" />
+          <MessageCircle className="relative h-6 w-6" />
         </motion.a>
       </div>
     </div>

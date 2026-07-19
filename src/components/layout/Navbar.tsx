@@ -1,196 +1,177 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, MapPin, CarFront } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, MessageCircle, Phone, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Fleet', href: '#fleet' },
   { name: 'Services', href: '#services' },
-  { name: 'Routes', href: '#routes' },
+  { name: 'Packages', href: '#routes' },
+  { name: 'Fleet', href: '#fleet' },
   { name: 'Reviews', href: '#reviews' },
 ];
 
+const phoneNumber = '+919356310911';
+const whatsappHref = `https://wa.me/919356310911?text=${encodeURIComponent('Hi, I want to book a taxi from Shirdi.')}`;
+
+const scrollToSection = (href: string) => {
+  const element = document.querySelector(href);
+  if (!element) return;
+  const top = element.getBoundingClientRect().top + window.scrollY - 86;
+  window.scrollTo({ top, behavior: 'smooth' });
+};
+
 export const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const sectionIds = ['#home', '#services', '#routes', '#fleet', '#reviews'];
+      let current = '#home';
+      sectionIds.forEach((id) => {
+        const element = document.querySelector(id);
+        if (element && element.getBoundingClientRect().top <= 120) current = id;
+      });
+
+      if (current) setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isMobileMenuOpen]);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
-    setIsMobileMenuOpen(false);
+  const handleNavigate = (href: string) => {
+    scrollToSection(href);
+    setIsOpen(false);
   };
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white shadow-lg border-b border-gray-100 py-2'
-            : 'bg-white/80 backdrop-blur-md py-4'
-        }`}
+      <motion.header
+        initial={{ y: -26, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <nav
+          className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between rounded-[1.4rem] border border-slate-200 bg-white px-3 shadow-[0_18px_48px_rgba(15,23,42,0.12)] transition-all duration-300 sm:px-4"
+        >
+          <button
+            onClick={() => handleNavigate('#home')}
+            className="flex min-w-0 items-center gap-3"
+            aria-label="Go to home"
+          >
+            <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] bg-slate-950 shadow-[0_16px_30px_rgba(15,23,42,0.22)]">
+              <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full border-2 border-white bg-emerald-500" />
+              <img src="/shirdi-cab-logo.svg" alt="" className="h-full w-full object-cover" />
+            </span>
+            <span className="min-w-0 text-left">
+              <span className="block whitespace-nowrap text-lg font-semibold leading-none text-slate-950 sm:text-xl">
+                Shirdi Cab Services
+              </span>
+              <span className="mt-1 hidden text-[10px] font-bold uppercase text-slate-400 sm:block">
+                Premium taxis / 24x7
+              </span>
+            </span>
+          </button>
 
-            {/* Logo Section */}
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#home');
-              }}
-              className="flex items-center gap-3 group z-50"
-            >
-              <div className="p-2.5 rounded-xl bg-amber-400 text-slate-900 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                <MapPin className="w-6 h-6" fill="currentColor" fillOpacity={0.2} />
-              </div>
-              <div>
-                <h1 className="font-bold text-xl lg:text-2xl leading-none tracking-tight text-slate-900">
-                  Shirdi Cab
-                </h1>
-                <p className="text-[10px] lg:text-xs font-bold uppercase tracking-[0.15em] text-amber-600">
-                  Services
-                </p>
-              </div>
-            </a>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-2">
-              {navLinks.map((link) => (
+          <div className="hidden items-center gap-1 rounded-2xl border border-slate-200/70 bg-slate-50/80 p-1 lg:flex">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
                 <button
                   key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  className="px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 relative group text-slate-600 hover:text-slate-900"
+                  onClick={() => handleNavigate(link.href)}
+                  className={`group relative rounded-xl px-4 py-2 text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-white text-slate-950 shadow-sm'
+                      : 'text-slate-500 hover:bg-white/70 hover:text-slate-950'
+                  }`}
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-amber-500 rounded-full transition-all duration-300 group-hover:w-2/3" />
+                  <span className={`absolute inset-x-4 bottom-1 h-px origin-left bg-amber-500 transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
                 </button>
-              ))}
-              
-              {/* Call to Action in Nav */}
-              <button
-                onClick={() => scrollToSection('#booking')}
-                className="group ml-4 flex items-center gap-2.5 rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-500 hover:text-slate-900 hover:shadow-amber-500/25 active:translate-y-0"
-              >
-                <CarFront className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                Book Your Ride
-              </button>
-            </div>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-slate-900 hover:bg-gray-100 transition-colors z-50"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-            </button>
+              );
+            })}
           </div>
-        </div>
-      </motion.nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[300px] bg-white z-40 lg:hidden shadow-2xl flex flex-col"
+          <div className="hidden items-center gap-2 lg:flex">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-200 bg-white text-emerald-500 shadow-sm transition-all hover:-translate-y-1 hover:border-emerald-400 hover:shadow-[0_14px_28px_rgba(16,185,129,0.16)]"
+              aria-label="Open WhatsApp chat"
             >
-              <div className="p-6 pt-24 flex-grow">
-                <nav className="space-y-2">
-                  {navLinks.map((link, index) => (
-                    <motion.button
-                      key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      onClick={() => scrollToSection(link.href)}
-                      className="w-full text-left text-slate-800 font-bold text-lg py-4 px-4 rounded-xl hover:bg-amber-50 transition-colors flex items-center justify-between group"
-                    >
-                      {link.name}
-                      <div className="w-2 h-2 rounded-full bg-amber-400 scale-0 group-hover:scale-100 transition-transform" />
-                    </motion.button>
-                  ))}
-                </nav>
+              <MessageCircle className="h-4 w-4" />
+            </a>
+            <a
+              href={`tel:${phoneNumber}`}
+              className="inline-flex h-11 items-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] transition-all hover:-translate-y-1 hover:bg-amber-400 hover:text-slate-950 hover:shadow-[0_18px_36px_rgba(245,158,11,0.22)]"
+            >
+              <Phone className="h-4 w-4" />
+              Book Ride
+            </a>
+          </div>
 
-                <div className="my-8 h-px bg-slate-100" />
+          <button
+            onClick={() => setIsOpen((value) => !value)}
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-950 shadow-sm lg:hidden"
+            aria-label="Toggle navigation menu"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </nav>
+      </motion.header>
 
-                {/* Quick Stats / Info Card */}
-                <div className="space-y-4">
-                  <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Available 24/7</span>
-                    </div>
-                    <p className="text-sm text-slate-700 font-medium mb-4">
-                      Reliable rides for your journey.
-                    </p>
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">10K+</div>
-                        <div className="text-[9px] text-slate-400 font-bold">Trips</div>
-                      </div>
-                      <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">15+</div>
-                        <div className="text-[9px] text-slate-400 font-bold">Years</div>
-                      </div>
-                      <div className="text-center p-2 bg-white rounded-lg shadow-sm">
-                        <div className="text-sm font-bold text-amber-600">4.8★</div>
-                        <div className="text-[9px] text-slate-400 font-bold">Rating</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-slate-950/35 backdrop-blur-sm lg:hidden"
+            onClick={() => setIsOpen(false)}
+          >
+            <motion.div
+              initial={{ y: -24, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -24, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-4 mt-24 rounded-[1.5rem] border border-slate-200 bg-white p-4 shadow-[0_28px_80px_rgba(15,23,42,0.2)]"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="grid gap-2">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.name}
+                    onClick={() => handleNavigate(link.href)}
+                    className="flex items-center justify-between rounded-2xl px-4 py-4 text-left text-base font-semibold text-slate-900 transition-colors hover:bg-[#fbfaf6]"
+                  >
+                    {link.name}
+                    <span className="h-1.5 w-1.5 bg-amber-400" />
+                  </button>
+                ))}
               </div>
-              
-              <div className="p-6">
-                <button
-                  onClick={() => scrollToSection('#booking')}
-                  className="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-amber-400 px-5 py-4 font-bold text-slate-900 shadow-lg shadow-amber-200 transition-all hover:-translate-y-0.5 hover:bg-amber-500 active:scale-95"
-                >
-                  <CarFront className="h-5 w-5" />
-                  Book Your Ride
-                </button>
+              <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+                <a href={`tel:${phoneNumber}`} className="flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-4 text-sm font-semibold text-white">
+                  <Phone className="h-4 w-4 text-amber-300" />
+                  Call
+                </a>
+                <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-2xl border border-emerald-200 px-4 py-4 text-sm font-semibold text-slate-950">
+                  <MessageCircle className="h-4 w-4 text-emerald-500" />
+                  WhatsApp
+                </a>
               </div>
             </motion.div>
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

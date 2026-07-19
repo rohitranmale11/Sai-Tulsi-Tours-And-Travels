@@ -1,0 +1,43 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="18" width="476" height="476" rx="92" fill="url(#bg)"/>
+  <rect x="18" y="18" width="476" height="476" rx="92" stroke="url(#edge)" stroke-width="4"/>
+  <path d="M360 274C386 229 382 171 345 131C296 78 213 80 166 135C127 181 128 248 167 293" stroke="url(#gold)" stroke-width="22" stroke-linecap="round"/>
+  <path d="M162 304C217 282 272 265 344 245C298 280 249 310 184 341L162 304Z" fill="url(#gold)"/>
+  <path d="M221 351C252 332 291 311 342 289C314 324 285 354 255 387L221 351Z" fill="url(#gold2)"/>
+  <path d="M237 333L265 318" stroke="#111111" stroke-width="9" stroke-linecap="round"/>
+  <path d="M278 310L307 294" stroke="#111111" stroke-width="9" stroke-linecap="round"/>
+  <path d="M164 227H348L332 171C328 157 316 148 302 148H210C196 148 184 157 180 171L164 227Z" fill="url(#gold)"/>
+  <path d="M196 181H316L325 215H187L196 181Z" fill="#111111"/>
+  <rect x="226" y="119" width="60" height="32" rx="8" fill="url(#gold2)"/>
+  <text x="256" y="141" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#111111">TAXI</text>
+  <path d="M160 226H352V267C352 276 345 283 336 283H176C167 283 160 276 160 267V226Z" fill="url(#gold2)"/>
+  <rect x="188" y="238" width="50" height="17" rx="8.5" fill="#111111"/>
+  <rect x="274" y="238" width="50" height="17" rx="8.5" fill="#111111"/>
+  <rect x="215" y="260" width="82" height="10" rx="5" fill="#111111" opacity="0.75"/>
+  <circle cx="197" cy="283" r="18" fill="#111111"/>
+  <circle cx="315" cy="283" r="18" fill="#111111"/>
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="5" fill="#F8FAFC">SHIRDI <tspan fill="#E6B422">CAB</tspan></text>
+  <text x="256" y="467" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="12" fill="#E6B422">SERVICES</text>
+  <defs>
+    <linearGradient id="bg" x1="58" y1="44" x2="464" y2="498" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191919"/>
+      <stop offset="0.52" stop-color="#090909"/>
+      <stop offset="1" stop-color="#181818"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="145" y1="98" x2="370" y2="354" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF18A"/>
+      <stop offset="0.45" stop-color="#F2C230"/>
+      <stop offset="1" stop-color="#B87800"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="160" y1="119" x2="354" y2="387" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE878"/>
+      <stop offset="0.5" stop-color="#E5AC14"/>
+      <stop offset="1" stop-color="#9A6500"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="66" y1="34" x2="450" y2="492" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="0.5" stop-color="#E6B422" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+</svg>

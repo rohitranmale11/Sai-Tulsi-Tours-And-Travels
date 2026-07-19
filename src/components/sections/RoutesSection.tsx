@@ -137,7 +137,7 @@ export const RoutesSection = () => {
                 <img
                   src={route.image}
                   alt={route.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
                 <div className="absolute bottom-6 left-6 z-20">
                   <span className="bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg">
