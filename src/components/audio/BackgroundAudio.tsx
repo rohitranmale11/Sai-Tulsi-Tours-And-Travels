@@ -1,20 +1,34 @@
-import { useEffect, useRef } from "react";
-import backgroundAudio from "@/assets/sounds/Shirdi-Cab-Services.mp3";
+import { useLayoutEffect, useRef } from "react";
+import backgroundAudio from "@/assets/sounds/shubh_tts_audio.mp3";
 
 const interactionEvents = ["click", "touchstart", "scroll", "keydown"] as const;
 
+let sharedAudio: HTMLAudioElement | null = null;
+let playbackStarted = false;
+let playbackFinished = false;
+
+const getBackgroundAudio = () => {
+  if (!sharedAudio) {
+    sharedAudio = new Audio(backgroundAudio);
+    sharedAudio.autoplay = true;
+    sharedAudio.loop = false;
+    sharedAudio.muted = false;
+    sharedAudio.volume = 0.1;
+    sharedAudio.preload = "auto";
+    sharedAudio.load();
+    sharedAudio.addEventListener("ended", () => {
+      playbackFinished = true;
+    });
+  }
+
+  return sharedAudio;
+};
+
 export const BackgroundAudio = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const hasStartedRef = useRef(false);
 
-  useEffect(() => {
-    if (!audioRef.current) {
-      const audio = new Audio(backgroundAudio);
-      audio.loop = true;
-      audio.volume = 0.4;
-      audio.preload = "auto";
-      audioRef.current = audio;
-    }
+  useLayoutEffect(() => {
+    audioRef.current = getBackgroundAudio();
 
     const audio = audioRef.current;
 
@@ -25,11 +39,11 @@ export const BackgroundAudio = () => {
     };
 
     const startAudio = async () => {
-      if (!audio || hasStartedRef.current) return true;
+      if (!audio || playbackStarted || playbackFinished) return true;
 
       try {
         await audio.play();
-        hasStartedRef.current = true;
+        playbackStarted = true;
         removeInteractionListeners();
         return true;
       } catch {
@@ -53,7 +67,6 @@ export const BackgroundAudio = () => {
 
     return () => {
       removeInteractionListeners();
-      audio.pause();
     };
   }, []);
 
