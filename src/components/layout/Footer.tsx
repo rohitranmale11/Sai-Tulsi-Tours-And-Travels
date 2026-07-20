@@ -50,7 +50,7 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-3">
               <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-slate-950 shadow-[0_18px_40px_rgba(245,158,11,0.2)] ring-1 ring-amber-300/30">
-                <img src="/shirdi-cab-logo.svg" alt="" className="h-full w-full object-cover" />
+                <img src="/shirdi-cab-logo.svg" alt="" width="48" height="48" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </span>
               <div>
                 <h2 className="whitespace-nowrap text-xl font-semibold leading-none">Shirdi Cab Services</h2>

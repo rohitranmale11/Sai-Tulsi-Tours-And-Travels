@@ -599,6 +599,10 @@ function HeroSection() {
                 <img
                   src={heroImage}
                   alt="Shirdi Cab Services branded premium taxi experience"
+                  width="1536"
+                  height="1024"
+                  decoding="async"
+                  fetchPriority="high"
                   className="relative z-10 h-full w-full object-cover transition-transform duration-1000 hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(135deg,rgba(255,255,255,0.18),transparent_42%,rgba(245,158,11,0.12))]" />
@@ -824,7 +828,11 @@ function PackagesSection() {
                 <div className="relative h-64 overflow-hidden rounded-t-[2rem]">
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={`${item.title} taxi package from Shirdi Cab Services`}
+                    width="640"
+                    height="426"
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
@@ -929,7 +937,11 @@ function FleetSection() {
               <div className="relative min-h-72 overflow-hidden rounded-[2rem] m-3 lg:m-4">
                 <img
                   src={vehicle.image}
-                  alt={vehicle.name}
+                  alt={`${vehicle.name} taxi available for Shirdi cab booking`}
+                  width="640"
+                  height="426"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent opacity-80" />
@@ -1152,6 +1164,10 @@ function BookingCTA() {
               <img
                 src={innova}
                 alt="Toyota Innova premium cab interior and exterior"
+                width="640"
+                height="426"
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover opacity-90 transition-transform duration-1000 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />

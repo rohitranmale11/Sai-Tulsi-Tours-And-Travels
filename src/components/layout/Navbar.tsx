@@ -70,7 +70,7 @@ export const Navbar = () => {
           >
             <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] bg-slate-950 shadow-[0_16px_30px_rgba(15,23,42,0.22)]">
               <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full border-2 border-white bg-emerald-500" />
-              <img src="/shirdi-cab-logo.svg" alt="" className="h-full w-full object-cover" />
+              <img src="/shirdi-cab-logo.svg" alt="" width="44" height="44" decoding="async" className="h-full w-full object-cover" />
             </span>
             <span className="min-w-0 text-left">
               <span className="block whitespace-nowrap text-lg font-semibold leading-none text-slate-950 sm:text-xl">
