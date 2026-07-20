@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const trustindexScriptSrc =
-  "https://cdn.trustindex.io/loader.js?8c25cca776d6190d9e26a099ef1";
+  "https://cdn.trustindex.io/loader.js?58a6d4477d3919335936857772a";
 
 let trustindexScriptMounted = false;
 
@@ -32,9 +32,6 @@ export const TrustindexReviews = () => {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      aria-label="Google reviews powered by Trustindex"
-    />
+    <div ref={containerRef} aria-label="Google reviews powered by Trustindex" />
   );
 };
