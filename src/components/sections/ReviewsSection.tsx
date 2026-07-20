@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { Star, Quote, CheckCircle2, MapPin, Calendar, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { useRef } from 'react';
+import { Star, Quote, CheckCircle2, MapPin, ArrowRight } from 'lucide-react';
 
 const reviews = [
   {
@@ -81,18 +81,7 @@ const stats = [
 export const ReviewsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const reviewsPerPage = 3;
-  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
-
-  const next = () => setCurrentIndex((prev) => (prev + 1) % totalPages);
-  const prev = () => setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
-
-  const visibleReviews = reviews.slice(
-    currentIndex * reviewsPerPage,
-    (currentIndex + 1) * reviewsPerPage
-  );
+  const reviewRail = [...reviews, ...reviews];
 
   return (
     <section id="reviews" className="py-24 bg-white relative overflow-hidden" ref={ref}>
@@ -131,15 +120,16 @@ export const ReviewsSection = () => {
           </div>
         </motion.div>
 
-        {/* 3-Column Review Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {visibleReviews.map((review, idx) => (
+        {/* Continuous Review Rail */}
+        <div className="testimonial-mask -mx-4 mb-20 overflow-hidden px-4 py-2">
+          <div className="testimonial-track flex w-max gap-8">
+          {reviewRail.map((review, idx) => (
             <motion.div
-              key={`${review.name}-${currentIndex}-${idx}`}
+              key={`${review.name}-${idx}`}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 flex flex-col group"
+              transition={{ delay: (idx % reviews.length) * 0.06 }}
+              className="flex w-[min(88vw,24rem)] shrink-0 flex-col bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group md:w-[25rem] lg:w-[27rem]"
             >
               {/* Header: Rating & Quote */}
               <div className="flex justify-between items-start mb-6">
@@ -180,32 +170,7 @@ export const ReviewsSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Centered Navigation */}
-        <div className="flex items-center justify-center gap-6 mb-20">
-          <button
-            onClick={prev}
-            className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-900 hover:text-white transition-all shadow-sm"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          
-          <div className="flex gap-2">
-            {[...Array(totalPages)].map((_, i) => (
-              <div 
-                key={i} 
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-8 bg-amber-500' : 'w-2 bg-slate-200'}`} 
-              />
-            ))}
           </div>
-
-          <button
-            onClick={next}
-            className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-900 hover:text-white transition-all shadow-sm"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Compact CTA Section */}

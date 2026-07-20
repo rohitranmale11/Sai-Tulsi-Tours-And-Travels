@@ -25,7 +25,6 @@ import {
   MessageCircle,
   Phone,
   Plane,
-  Quote,
   Route,
   ShieldCheck,
   Sparkles,
@@ -46,6 +45,7 @@ import shaniImg from "@/assets/routes/shani.jpg";
 import trimbakImg from "@/assets/routes/trimbak.jpg";
 import bhimashankarImg from "@/assets/routes/sri-bhimashankar-temple.jpg";
 import vaniImg from "@/assets/routes/image.png";
+import { TrustindexReviews } from "@/components/reviews/TrustindexReviews";
 
 const phoneNumber = "+919356310911";
 const displayPhone = "+91 93563 10911";
@@ -311,49 +311,6 @@ const vehicles = [
       "Luggage space",
       "Tour coordination",
     ],
-  },
-];
-
-const reviews = [
-  {
-    name: "Priya Patel",
-    city: "Pune",
-    route: "Shirdi, Shani Shingnapur, Trimbakeshwar",
-    text: "Respectful driver, clean Ertiga, and a well-paced temple plan. The trip felt calm from pickup to return.",
-  },
-  {
-    name: "Amit Kumar",
-    city: "Delhi",
-    route: "Shirdi Airport to Hotel",
-    text: "Booked for a 5 AM airport pickup. Driver was already waiting, fare was exactly what was shared on WhatsApp.",
-  },
-  {
-    name: "Mahesh Joshi",
-    city: "Sambhajinagar",
-    route: "Group pilgrim tour",
-    text: "The Tempo Traveller was comfortable for our group and the coordination made the full-day darshan easy.",
-  },
-];
-
-const extendedReviews = [
-  ...reviews,
-  {
-    name: "Rajesh Sharma",
-    city: "Mumbai",
-    route: "Shirdi to Mumbai Airport",
-    text: "The Innova arrived early, the cabin was spotless, and the driver handled the highway calmly. Very professional.",
-  },
-  {
-    name: "Sunita Deshmukh",
-    city: "Nashik",
-    route: "Monthly business travel",
-    text: "Consistent quality every time. The team understands timings, clean cars, and business guest expectations.",
-  },
-  {
-    name: "Kavita Reddy",
-    city: "Bangalore",
-    route: "Shirdi to Pune Airport",
-    text: "The long drive felt smooth and predictable. Fare was clear, vehicle was comfortable, and support was quick.",
   },
 ];
 
@@ -1031,8 +988,6 @@ function FleetSection() {
 }
 
 function ReviewsSection() {
-  const reviewRail = [...extendedReviews, ...extendedReviews];
-
   return (
     <section
       id="reviews"
@@ -1047,41 +1002,8 @@ function ReviewsSection() {
           text="Real feedback from families, pilgrims, business guests, and group travelers who trusted Shirdi Cab Services for their journey."
         />
 
-        <div className="testimonial-mask -mx-5 overflow-hidden px-5 pb-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-          <div className="testimonial-track flex w-max gap-6">
-            {reviewRail.map((review, index) => {
-              const initials = review.name
-                .split(" ")
-                .map((part) => part[0])
-                .join("")
-                .slice(0, 2);
-
-              return (
-                <article
-                  key={`${review.name}-${index}`}
-                  className="premium-spotlight group relative flex h-[17rem] w-[20rem] shrink-0 flex-col justify-between rounded-[1.6rem] border border-slate-200 bg-white/92 p-6 shadow-[0_22px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-red-200 hover:shadow-[0_34px_90px_rgba(15,23,42,0.14)] sm:w-[23rem]"
-                >
-                  <Quote className="h-7 w-7 fill-red-500 text-red-500" />
-                  <p className="mt-8 text-base font-medium leading-7 text-slate-600">
-                    {review.text}
-                  </p>
-                  <div className="mt-7 flex items-center gap-4 border-t border-slate-100 pt-5">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-sm font-semibold text-red-500 transition-transform group-hover:scale-110">
-                      {initials}
-                    </span>
-                    <div>
-                      <p className="font-semibold text-slate-950">
-                        {review.name}
-                      </p>
-                      <p className="mt-1 text-xs font-medium text-slate-500">
-                        {review.city} / {review.route}
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+        <div className="-mx-5 overflow-hidden px-5 pb-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <TrustindexReviews />
         </div>
       </div>
     </section>
